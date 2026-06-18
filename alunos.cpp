@@ -2,25 +2,39 @@
 #include <string>
 using namespace std;
 
-class aluno {
+class Aluno {
 private:
-    std::string nome;
+    string nome;
+    double nota1;
+    double nota2;
+
 public:
-    aluno(std::string nome) {
-        this->nome = nome;
+    Aluno(const string& nome, double nota1, double nota2)
+        : nome(nome), nota1(nota1), nota2(nota2) {}
+
+    double media() const {
+        return (nota1 + nota2) / 2.0;
     }
 
-    void nota(int nota) {
-        std::cout << this->nome << " tem nota " << nota << "." << std::endl;
+    void mostrarSituacao() const {
+        double m = media();
+        cout << nome << " - nota1: " << nota1 << ", nota2: " << nota2
+             << ", media: " << m;
+        if (m >= 7.0) {
+            cout << " -> Aprovado"; 
+        } else {
+            cout << " -> Reprovado";
+        }
+        cout << endl;
     }
-    
 };
+
 int main() {
+    Aluno c1("João", 8.0, 7.0);
+    Aluno c2("Maria", 9.0, 4.0);
 
-aluno c1("João");
-aluno c2("Maria");
+    c1.mostrarSituacao();
+    c2.mostrarSituacao();
 
-c1.nota(8);
-c2.nota(9);
-return 0;
+    return 0;
 }
